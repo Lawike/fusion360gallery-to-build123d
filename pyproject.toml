@@ -1,0 +1,24 @@
+[project]
+    name = "f360-to-b123d"
+    requires-python = ">= 3.10"
+    version = "1.0"
+    authors =[{name = "Lawike"}]
+    readme = "README.md"
+    dependencies = ["build123d"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[build-system] 
+    build-backend = "hatchling.build"
+    requires = ["hatchling"]
+
+[tool.hatch.build.targets.wheel]
+    packages = ["./src"]
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+python_files = "*_test.py"
+pythonpath = [
+  "."
+]
