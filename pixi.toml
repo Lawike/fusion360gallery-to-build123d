@@ -21,6 +21,7 @@ ocp-vscode = "*"
 
 [feature.test.dependencies]
 pytest = "*"
+pip = "*"
 
 [feature.test.tasks]
 test = "pytest"
