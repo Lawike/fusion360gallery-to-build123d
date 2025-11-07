@@ -1,10 +1,12 @@
 from build123d import *
 from src.f360_to_b123d import *
 from mock_data.mock_data_f360 import (
-    empty_fusion360_data,
     empty_fusion360_sketch_data,
     square_fusion360_sketch_data,
     circle_fusion360_sketch_data,
+    curved_face_fusion360_sketch_data,
+    cube_fusion360_data,
+    cylinder_fusion360_data
 )
 
 
@@ -22,20 +24,20 @@ def test_fusion360_to_build123d_dummy() -> None:
 # ---------------------------------------------------------------------------------
 # Test fusions360_sketch_to_build123d function
 def test_fusion360_sketch_to_build123d_dummy() -> None:
-    build123d_sketch = fusion360_sketch_to_build123d_sketch(None)
+    build123d_sketch = fusion360_to_build123d_sketch(None)
 
     assert build123d_sketch == None
 
 
 def test_fusion360_sketch_to_build123d_empty() -> None:
-    build123d_sketch = fusion360_sketch_to_build123d_sketch(empty_fusion360_sketch_data)
+    build123d_sketch = fusion360_to_build123d_sketch(empty_fusion360_sketch_data)
 
     assert isinstance(build123d_sketch, Sketch)
 
 
 # Manually checked 06/11/2025
 def test_fusion360_sketch_to_build123d_square() -> None:
-    build123d_sketch = fusion360_sketch_to_build123d_sketch(
+    build123d_sketch = fusion360_to_build123d_sketch(
         square_fusion360_sketch_data
     )
     show(build123d_sketch)
@@ -44,8 +46,34 @@ def test_fusion360_sketch_to_build123d_square() -> None:
 
 # Manually checked 06/11/2025
 def test_fusion360_sketch_to_build123d_circle() -> None:
-    build123d_sketch = fusion360_sketch_to_build123d_sketch(
+    build123d_sketch = fusion360_to_build123d_sketch(
         circle_fusion360_sketch_data
     )
     show(build123d_sketch)
+    assert True
+
+# Manually checked 07/11/2025
+def test_fusion360_to_build123d_curved_face() -> None:
+    build123d_sketch = fusion360_to_build123d_sketch(
+        curved_face_fusion360_sketch_data
+    )
+    show(build123d_sketch)
+    assert True
+
+# Manually checked 07/11/2025
+def test_fusion360_to_build123d_cube() -> None:
+    build123d_sketch = fusion360_to_build123d_sketch(
+        cube_fusion360_data["entities"]["sketch0"]
+    )
+    build123_cube = fusion360_to_build123d_extrude(cube_fusion360_data["entities"]["extrude0"], build123d_sketch)
+    show(build123_cube)
+    assert True
+
+# Manually checked 07/11/2025
+def test_fusion360_to_build123d_cylinder():
+    build123d_sketch = fusion360_to_build123d_sketch(
+        cylinder_fusion360_data["entities"]["sketch0"]
+    )
+    build123d_cylinder = fusion360_to_build123d_extrude(cylinder_fusion360_data["entities"]["extrude0"], build123d_sketch)
+    show(build123d_cylinder)
     assert True
